@@ -31,8 +31,9 @@ func (p Person) PrintData() {
 func main() {
 	var p1 Person
 	var p2 Person
+	fmt.Print("enter the details of person:")
 	p1 = p1.readData()
-	p2 = p2.readData()
 	p1.PrintData()
+	p2 = p2.readData()
 	p2.PrintData()
 }
