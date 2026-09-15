@@ -29,8 +29,8 @@ func (p Person) PrintData() {
 }
 
 func main() {
-	var p2 Person
 	var p1 Person
+	var p2 Person
 	p1 = p1.readData()
 	p2 = p2.readData()
 	p1.PrintData()
