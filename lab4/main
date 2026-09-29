@@ -1,0 +1,56 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func square(ch chan string) {
+	fmt.Println("Square goroutine started")
+
+	for i := 1; i <= 3; i++ {
+		time.Sleep(100 * time.Millisecond)
+		ch <- fmt.Sprintf("Square of %d = %d", i, i*i)
+	}
+
+	fmt.Println("Square goroutine completed")
+}
+
+func cube(ch chan string) {
+	fmt.Println("Cube goroutine started")
+
+	for i := 1; i <= 3; i++ {
+		time.Sleep(150 * time.Millisecond)
+		ch <- fmt.Sprintf("Cube of %d = %d", i, i*i*i)
+	}
+
+	fmt.Println("Cube goroutine completed")
+}
+
+func fibonacci(ch chan string) {
+	fmt.Println("Fibonacci goroutine started")
+
+	a, b := 0, 1
+
+	for i := 0; i < 3; i++ {
+		time.Sleep(200 * time.Millisecond)
+		ch <- fmt.Sprintf("Fibonacci = %d", a)
+		a, b = b, a+b
+	}
+
+	fmt.Println("Fibonacci goroutine completed")
+}
+
+func main() {
+	ch := make(chan string)
+
+	go square(ch)
+	go cube(ch)
+	go fibonacci(ch)
+
+	for i := 0; i < 9; i++ {
+		fmt.Println("Main received:", <-ch)
+	}
+
+	fmt.Println("All goroutines finished.")
+}
