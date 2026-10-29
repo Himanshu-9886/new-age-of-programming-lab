@@ -1,0 +1,69 @@
+
+open System
+open System.Text.RegularExpressions
+
+// 1. Reverse a string and check palindrome
+let reverseString (text: string) =
+    text |> Seq.rev |> Seq.toArray |> String
+
+let isPalindrome (text: string) =
+    let cleaned =
+        text
+        |> Seq.filter Char.IsLetterOrDigit
+        |> Seq.map Char.ToLowerInvariant
+        |> Seq.toArray
+        |> String
+
+    cleaned = reverseString cleaned
+
+// 2. Transform a string based on its content
+let transformString (text: string) =
+    if text.Length > 0 && text |> Seq.forall Char.IsLetter then
+        text.ToUpperInvariant()
+    elif text.Length > 0 && text |> Seq.forall Char.IsDigit then
+        text + text
+    else
+        text
+
+// 3. Validate email address format
+let isValidEmail (email: string) =
+    Regex.IsMatch(
+        email,
+        @"^[A-Za-z0-9]+([._%+\-][A-Za-z0-9]+)*@[A-Za-z0-9]+([\-][A-Za-z0-9]+)*(\.[A-Za-z]{2,})+$"
+    )
+
+// Test 1: Reverse and palindrome
+printfn "=== Reverse and Palindrome ==="
+
+let palindromeTests = [ "madam"; "hello"; "Racecar" ]
+
+palindromeTests
+|> List.iter (fun text ->
+    printfn "String: %s | Reverse: %s | Palindrome: %b"
+        text (reverseString text) (isPalindrome text)
+)
+
+// Test 2: String transformation
+printfn "\n=== String Transformation ==="
+
+let transformTests = [ "hello"; "1234"; "abc123"; "WORLD"; "007" ]
+
+transformTests
+|> List.iter (fun text ->
+    printfn "Input: %s | Output: %s" text (transformString text)
+)
+
+// Test 3: Email validation
+printfn "\n=== Email Validation ==="
+
+let emailTests =
+    [ "student@example.com"
+      "user.name@gmail.com"
+      "invalid-email"
+      "abc@domain"
+      "test123@yahoo.co.in" ]
+
+emailTests
+|> List.iter (fun email ->
+    printfn "Email: %s | Valid: %b" email (isValidEmail email)
+)
