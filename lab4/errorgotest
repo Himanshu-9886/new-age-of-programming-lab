@@ -1,0 +1,57 @@
+package main
+
+import (
+	"strings"
+	"testing"
+)
+
+func TestDivide(t *testing.T) {
+	got, err := Divide(10, 2)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != 5 {
+		t.Errorf("got %v, want 5", got)
+	}
+}
+
+func TestDivideByZero(t *testing.T) {
+	_, err := Divide(10, 0)
+	if err == nil || !strings.Contains(err.Error(), "division by zero") {
+		t.Fatal("expected division by zero error")
+	}
+}
+
+func TestSquareRoot(t *testing.T) {
+	got, err := SquareRoot(25)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != 5 {
+		t.Errorf("got %v, want 5", got)
+	}
+}
+
+func TestNegativeSquareRoot(t *testing.T) {
+	_, err := SquareRoot(-9)
+	if err == nil || !strings.Contains(err.Error(), "negative square root") {
+		t.Fatal("expected negative square root error")
+	}
+}
+
+func TestNormalizeInput(t *testing.T) {
+	got, err := NormalizeInput("  Hello Go  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != "Hello Go" {
+		t.Errorf("got %q, want Hello Go", got)
+	}
+}
+
+func TestEmptyInput(t *testing.T) {
+	_, err := NormalizeInput("   ")
+	if err == nil || !strings.Contains(err.Error(), "empty input") {
+		t.Fatal("expected empty input error")
+	}
+}
