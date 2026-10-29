@@ -1,0 +1,22 @@
+
+let isPrime n =
+    let rec check divisor =
+        if divisor * divisor > n then
+            true
+        elif n % divisor = 0 then
+            false
+        else
+            check (divisor + 1)
+
+    if n < 2 then false
+    else check 2
+
+let testNumbers = [ 2; 7; 10; 13; 1; 17 ]
+
+testNumbers
+|> List.iter (fun number ->
+    if isPrime number then
+        printfn "%d is a prime number" number
+    else
+        printfn "%d is not a prime number" number
+)
