@@ -1,0 +1,45 @@
+open System
+
+let main =
+    async {
+
+        let work1 =
+            async {
+                do! Async.Sleep(1000)
+                printfn "Task 1: Started"
+                return "Task 1: Data downloaded successfully"
+            }
+
+        let work2 =
+            async {
+                do! Async.Sleep(2000)
+                printfn "Task 2: Started"
+                return "Task 2: File processed successfully"
+            }
+
+        let work3 =
+            async {
+                do! Async.Sleep(3000)
+                printfn "Task 3: Started"
+                return "Task 3: Report generated successfully"
+            }
+
+        let jobs = [|
+            work1
+            work2
+            work3
+        |]
+
+        let parallelTask =
+            jobs
+            |> Async.Parallel
+
+        let results =
+            Async.RunSynchronously parallelTask
+
+        printfn "All tasks completed:"
+        printfn "%A" results
+    }
+
+main
+|> Async.RunSynchronously
