@@ -1,0 +1,33 @@
+open System
+
+// Taking first list
+printfn "Enter first list:"
+let list1 = Console.ReadLine().Split(' ') |> Array.map int |> Array.toList
+
+// Taking second list
+printfn "Enter second list:"
+let list2 = Console.ReadLine().Split(' ') |> Array.map int |> Array.toList
+
+// List.map - Square numbers
+let map1 = List.map (fun x -> x * x) list1
+let map2 = List.map (fun x -> x * x) list2
+
+printfn "\nList.map:"
+printfn "%A" map1
+printfn "%A" map2
+
+// List.filter - Find even numbers
+let filter1 = List.filter (fun x -> x % 2 = 0) list1
+let filter2 = List.filter (fun x -> x % 2 = 0) list2
+
+printfn "\nList.filter:"
+printfn "%A" filter1
+printfn "%A" filter2
+
+// List.fold - Find sum
+let fold1 = List.fold (fun a b -> a + b) 0 list1
+let fold2 = List.fold (fun a b -> a + b) 0 list2
+
+printfn "\nList.fold:"
+printfn "Sum of first list = %d" fold1
+printfn "Sum of second list = %d" fold2
