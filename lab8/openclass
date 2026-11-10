@@ -1,0 +1,51 @@
+#r "nuget: Microsoft.Data.Sqlite"
+
+open Microsoft.Data.Sqlite
+
+let con = new SqliteConnection("Data Source=students.db")
+con.Open()
+
+let cmd = con.CreateCommand()
+cmd.CommandText <- "CREATE TABLE IF NOT EXISTS Students (Id INTEGER PRIMARY KEY, Name TEXT, Age INTEGER)"
+cmd.ExecuteNonQuery() |> ignore
+
+let clear = con.CreateCommand()
+clear.CommandText <- "DELETE FROM Students"
+clear.ExecuteNonQuery() |> ignore
+
+// CREATE
+let insert = con.CreateCommand()
+insert.CommandText <- "INSERT INTO Students VALUES (1, 'Rahul', 20)"
+insert.ExecuteNonQuery() |> ignore
+
+printfn "After Create:"
+
+// READ
+let read() =
+    let c = con.CreateCommand()
+    c.CommandText <- "SELECT * FROM Students"
+    use r = c.ExecuteReader()
+
+    while r.Read() do
+        printfn "ID: %d Name: %s Age: %d"
+            (r.GetInt32(0)) (r.GetString(1)) (r.GetInt32(2))
+
+read()
+
+// UPDATE
+let update = con.CreateCommand()
+update.CommandText <- "UPDATE Students SET Age=21 WHERE Id=1"
+update.ExecuteNonQuery() |> ignore
+
+printfn "\nAfter Update:"
+read()
+
+// DELETE
+let delete = con.CreateCommand()
+delete.CommandText <- "DELETE FROM Students WHERE Id=1"
+delete.ExecuteNonQuery() |> ignore
+
+printfn "\nAfter Delete:"
+read()
+
+con.Close()
