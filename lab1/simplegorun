@@ -1,0 +1,24 @@
+
+package main
+
+import "fmt"
+
+func main() {
+    // Declare two integer variables
+    var a int = 10
+    var b int = 5
+
+    // Declare two float variables
+    var x float64 = 10.5
+    var y float64 = 2.5
+
+    // Integer operations
+    fmt.Println("Integer Addition:", a+b)
+    fmt.Println("Integer Subtraction:", a-b)
+    fmt.Println("Integer Multiplication:", a*b)
+
+    // Floating-point operations
+    fmt.Println("Float Addition:", x+y)
+    fmt.Println("Float Subtraction:", x-y)
+    fmt.Println("Float Multiplication:", x*y)
+}
