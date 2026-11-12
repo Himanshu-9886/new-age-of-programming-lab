@@ -1,0 +1,109 @@
+
+package main
+
+import "fmt"
+
+func main() {
+    var a, b int
+    var x, y float64
+    var choice int
+    var err error
+
+    // Input for first integer
+    for {
+        fmt.Print("Enter first integer (-1000 to 1000): ")
+        _, err = fmt.Scan(&a)
+
+        if err == nil && a >= -1000 && a <= 1000 {
+            break
+        }
+        fmt.Println("Invalid input! Enter a valid integer.")
+        fmt.Scanln()
+    }
+
+    // Input for second integer
+    for {
+        fmt.Print("Enter second integer (-1000 to 1000): ")
+        _, err = fmt.Scan(&b)
+
+        if err == nil && b >= -1000 && b <= 1000 {
+            break
+        }
+        fmt.Println("Invalid input! Enter a valid integer.")
+        fmt.Scanln()
+    }
+
+    // Input for first float
+    for {
+        fmt.Print("Enter first float (-1000 to 1000): ")
+        _, err = fmt.Scan(&x)
+
+        if err == nil && x >= -1000 && x <= 1000 {
+            break
+        }
+        fmt.Println("Invalid input! Enter a valid number.")
+        fmt.Scanln()
+    }
+
+    // Input for second float
+    for {
+        fmt.Print("Enter second float (-1000 to 1000): ")
+        _, err = fmt.Scan(&y)
+
+        if err == nil && y >= -1000 && y <= 1000 {
+            break
+        }
+        fmt.Println("Invalid input! Enter a valid number.")
+        fmt.Scanln()
+    }
+
+    // Choose operation
+    fmt.Println("\nChoose an operation:")
+    fmt.Println("1. Addition")
+    fmt.Println("2. Subtraction")
+    fmt.Println("3. Multiplication")
+    fmt.Println("4. Division")
+
+    for {
+        fmt.Print("Enter your choice (1-4): ")
+        _, err = fmt.Scan(&choice)
+
+        if err == nil && choice >= 1 && choice <= 4 {
+            break
+        }
+        fmt.Println("Invalid choice! Enter a number between 1 and 4.")
+        fmt.Scanln()
+    }
+
+    // Perform operations
+    if choice == 1 {
+        fmt.Println("\nAddition:")
+        fmt.Println("Integer:", a+b)
+        fmt.Println("Float:", x+y)
+
+    } else if choice == 2 {
+        fmt.Println("\nSubtraction:")
+        fmt.Println("Integer:", a-b)
+        fmt.Println("Float:", x-y)
+
+    } else if choice == 3 {
+        fmt.Println("\nMultiplication:")
+        fmt.Println("Integer:", a*b)
+        fmt.Println("Float:", x*y)
+
+    } else if choice == 4 {
+        fmt.Println("\nDivision:")
+
+        if b != 0 {
+            fmt.Println("Integer:", a/b)
+        } else {
+            fmt.Println("Integer division by zero is not allowed.")
+        }
+
+        if y != 0 {
+            fmt.Println("Float:", x/y)
+        } else {
+            fmt.Println("Float division by zero is not allowed.")
+        }
+    }
+}
