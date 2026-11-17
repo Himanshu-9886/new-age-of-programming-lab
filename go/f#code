@@ -1,0 +1,47 @@
+
+// Student record
+type Student = {
+    Name: string
+    RollNO: int
+    Marks: int
+}
+
+// Student details
+let students = [
+    { Name = "Rahul"; RollNO = 1; Marks = 85 }
+    { Name = "Priya"; RollNO = 2; Marks = 72 }
+    { Name = "Aman"; RollNO = 3; Marks = 40 }
+    { Name = "Neha"; RollNO = 4; Marks = 90 }
+]
+
+// Display all students
+printfn "Student Records:"
+students |> List.iter (fun s ->
+    printfn "%s  RollNO: %d  Marks: %d" s.Name s.RollNO s.Marks
+)
+
+// map
+let updatedStudents =   
+    students |> List.map (fun s ->
+        { s with Marks = s.Marks + 5 }
+    )
+
+printfn "\nAfter Adding 5 Marks:"
+updatedStudents |> List.iter (fun s ->
+    printfn "%s (RollNO: %d) - %d" s.Name s.RollNO s.Marks
+)
+
+//  filter
+let passedStudents =
+    updatedStudents |> List.filter (fun s -> s.Marks >= 50)
+
+printfn "\nStudents Who Passed:"
+passedStudents |> List.iter (fun s ->
+    printfn "%s (RollNO: %d) - %d" s.Name s.RollNO s.Marks
+)
+let failedStudents =
+    updatedStudents |> List.filter (fun s -> s.Marks < 50)
+
+printfn "\nStudents Who Failed:"
+failedStudents |> List.iter (fun s ->
+    printfn "%s (RollNO: %d) - %d" s.Name s.RollNO s.Marks)
