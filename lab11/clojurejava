@@ -1,0 +1,39 @@
+
+(ns java-interoperability
+  (:import [java.util ArrayList HashMap]))
+
+;; 1. Calling Java static methods
+(println "Absolute value:" (Math/abs -25))
+(println "Square root:" (Math/sqrt 64))
+(println "Current time:" (System/currentTimeMillis))
+
+;; 2. Creating Java objects
+(def list1 (new ArrayList))
+(def map1 (new HashMap))
+
+;; 3. Calling instance methods
+(.add list1 "Apple")
+(.add list1 "Banana")
+(.add list1 "Mango")
+
+(println "Java ArrayList:" list1)
+(println "List size:" (.size list1))
+
+(.put map1 "Name" "Rahul")
+(.put map1 "Age" 20)
+
+(println "Java HashMap:" map1)
+(println "Name:" (.get map1 "Name"))
+
+;; 4. Converting Clojure and Java collections
+
+;; Clojure collection to Java collection
+(def clj-list [10 20 30 40])
+(def java-list (java.util.ArrayList. clj-list))
+
+(println "Clojure to Java:" java-list)
+
+;; Java collection to Clojure collection
+(def new-clj-list (vec java-list))
+
+(println "Java to Clojure:" new-clj-list)
